@@ -17,7 +17,17 @@ COPY pyproject.toml .
 COPY foo foo
 
 # `rye` isn't on PATH until we source `~/.profile` (which sources `~/.rye/env`)
-RUN /root/.rye/shims/rye sync --no-dev
+# RUN /root/.rye/shims/rye sync --no-dev
+
+# `rye` is a problem, rolling back to pip!! 
+COPY requirements.lock .
+
+# Create venv so we can keep using same CMD's
+RUN python -m venv .venv
+
+# Set PROJECT_ROOT so that pip can expand ${PROJECT_ROOT} in lock file
+ENV PROJECT_ROOT=app 
+RUN .venv/bin/pip install -r requirements.lock
 
 COPY app app
 
@@ -29,9 +39,15 @@ FROM prod AS dev
 WORKDIR /app
 
 # Install dev dependencies, see above for note on PATH 
-RUN /root/.rye/shims/rye sync
+# RUN /root/.rye/shims/rye sync
+
+# `rye` is a problem, rolling back to pip!!
+COPY requirements-dev.lock .
+RUN .venv/bin/pip install -r requirements-dev.lock
 
 COPY tests tests
 
+# Would need to put this venv on a PATH for the dev environment, 
+# rye automagically handled getting it sourced through ~/.profile
 CMD [".venv/bin/python", "-m", "pytest"]
 
