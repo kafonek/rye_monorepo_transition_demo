@@ -2,6 +2,7 @@
 name = "monodemo"
 dependencies = [
     "flask",
+    "pybind11>=2.13.1",
     "foo @ file:///${PROJECT_ROOT}/foo",
 ]
 

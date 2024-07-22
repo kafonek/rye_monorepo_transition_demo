@@ -16,8 +16,6 @@ click==8.1.7
 exceptiongroup==1.2.2
     # via pytest
 flask==2.3.3
-    # via foo
-foo @ file:///${PROJECT_ROOT}/foo
 iniconfig==2.0.0
     # via pytest
 itsdangerous==2.2.0
@@ -31,6 +29,7 @@ packaging==24.1
     # via pytest
 pluggy==1.5.0
     # via pytest
+pybind11==2.13.1
 pytest==8.3.1
 tomli==2.0.1
     # via pytest

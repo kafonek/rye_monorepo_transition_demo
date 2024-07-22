@@ -14,8 +14,6 @@ blinker==1.8.2
 click==8.1.7
     # via flask
 flask==2.3.3
-    # via foo
-foo @ file:///${PROJECT_ROOT}/foo
 itsdangerous==2.2.0
     # via flask
 jinja2==3.1.4
@@ -23,5 +21,6 @@ jinja2==3.1.4
 markupsafe==2.1.5
     # via jinja2
     # via werkzeug
+pybind11==2.13.1
 werkzeug==3.0.3
     # via flask
